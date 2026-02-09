@@ -1,0 +1,79 @@
+<% layout("/layouts/boilerplate") %>
+
+<% if (success && success.length) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= success[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% } %>
+
+<!-- FILTER SECTION -->
+<div class="filter mb-4">
+  <div class="filter-item">
+    <i class="fa-solid fa-fire"></i>
+    <p>Trending</p>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-bed"></i>
+    <p>Rooms</p>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-mountain"></i>
+    <p>Mountains</p>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-water"></i>
+    <p>River</p>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-campground"></i>
+    <p>Camping</p>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-moon"></i>
+    <p>Sleeping</p>
+  </div>
+</div>
+
+<h3 class="mb-4">All Listings</h3>
+
+<div class="row">
+  <% for (let listing of allListings) { %>
+    <div class="col-md-4 mb-4">
+
+      <a href="/listings/<%= listing._id %>" class="listing-link">
+
+        <div class="card h-100">
+
+          <!-- IMAGE -->
+          <img 
+            src="<%= listing.image && listing.image.url ? listing.image.url : 'https://via.placeholder.com/400x250?text=No+Image' %>"
+            class="card-img-top"
+            alt="listing image"
+            style="height: 20rem; object-fit: cover;">
+
+          <!-- CARD BODY -->
+          <div class="card-body">
+
+            <h5 class="card-title mb-1">
+              <%= listing.title %>
+            </h5>
+
+            <p class="card-text text-muted mb-2">
+              ₹ <%= listing.price.toLocaleString() %> / night
+            </p>
+
+          </div>
+
+        </div>
+
+      </a>
+
+    </div>
+  <% } %>
+</div>
